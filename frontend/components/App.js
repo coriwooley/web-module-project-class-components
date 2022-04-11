@@ -20,6 +20,15 @@ export default class App extends React.Component {
     todos: todos
   }
 
+  clearCompleted = () => {
+    this.setState({
+      todos: this.state.todos.filter(todo => {
+        return !todo.completed
+      })
+    })
+  }
+  
+
   addNewTodo = todo => {
     const newTodo = {
       name: todo,
@@ -27,7 +36,7 @@ export default class App extends React.Component {
       completed: false
     }
     this.setState({
-      todos: [...todos, newTodo]
+      todos: [...this.state.todos, newTodo]
     })
   }
 
@@ -45,6 +54,7 @@ export default class App extends React.Component {
     })
   }
   
+  
   render() {
     const {todos} = this.state
     return (
@@ -52,7 +62,7 @@ export default class App extends React.Component {
         <TodoList toggleCompleted={this.toggleCompleted} todos={todos}/>
         <Form addNewTodo={this.addNewTodo}/>
         
-        <button>clear completed</button>
+        <button onClick={this.clearCompleted}>clear completed</button>
       </div>
     )
   }
